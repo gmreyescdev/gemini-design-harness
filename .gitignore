@@ -1,0 +1,21 @@
+# Dependencias y entornos
+node_modules/
+.env
+.env*.local
+*.log
+
+# Entornos de desarrollo
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Temporales de builds y pruebas
+dist/
+build/
+coverage/
+.turbo/
+.next/
+
+# Spikes descartables (opcional: comitear si aportan contexto, o ignorar)
+# spikes/*.tmp
