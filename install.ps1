@@ -5,15 +5,36 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
+$repoUrl = 'https://github.com/gmreyescdev/gemini-design-harness.git'
+$zipUrl = 'https://github.com/gmreyescdev/gemini-design-harness/archive/refs/heads/main.zip'
 
 $kit = $PSScriptRoot
-if ([string]::IsNullOrWhiteSpace($kit)) {
-    $kit = (Get-Location).Path
+$kitAgents = $null
+if (-not [string]::IsNullOrWhiteSpace($kit)) {
+    $kitAgents = Join-Path $kit 'AGENTS.md'
+}
+
+if ([string]::IsNullOrWhiteSpace($kit) -or -not (Test-Path -LiteralPath $kitAgents)) {
+    $currentAgents = Join-Path (Get-Location).Path 'AGENTS.md'
+    if (Test-Path -LiteralPath $currentAgents) {
+        $kit = (Get-Location).Path
+    } else {
+        Write-Host "Descargando Gemini Design Harness desde GitHub..." -ForegroundColor Cyan
+        $zip = Join-Path $env:TEMP 'gemini-design-harness.zip'
+        $tmp = Join-Path $env:TEMP 'gemini-design-harness-main'
+
+        Invoke-WebRequest -Uri $zipUrl -OutFile $zip -UseBasicParsing
+        if (Test-Path -LiteralPath $tmp) {
+            Remove-Item -LiteralPath $tmp -Recurse -Force
+        }
+        Expand-Archive -Path $zip -DestinationPath $env:TEMP -Force
+        $kit = $tmp
+    }
 }
 
 $kitAgents = Join-Path $kit 'AGENTS.md'
 if (-not (Test-Path -LiteralPath $kitAgents)) {
-    throw "No se encontro AGENTS.md en la ruta del kit: $kit. Ejecuta el script desde la carpeta de Gemini Design Harness."
+    throw "No se encontro AGENTS.md en la ruta del kit: $kit. Revisa tu conexion o clona el repositorio manualmente."
 }
 
 Write-Host ""

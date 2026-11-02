@@ -57,14 +57,17 @@ G0 Intake ──► G1 Alcance ──► G2 Datos ──► G3 Diseño ──►
 
 ### 1. Instalar en tu proyecto
 
-En **PowerShell** (Windows):
+En **PowerShell** (Windows - comando único):
 ```powershell
-.\install.ps1 -Project "C:\Ruta\A\TuProyecto"
+irm https://raw.githubusercontent.com/gmreyescdev/gemini-design-harness/main/install.ps1 | iex
 ```
+*(O de forma manual: `.\install.ps1 -Project "C:\Ruta\A\TuProyecto"`)*
 
 En **Bash** (macOS / Linux):
 ```bash
-./install.sh /ruta/a/tu-proyecto
+git clone https://github.com/gmreyescdev/gemini-design-harness.git
+cd gemini-design-harness
+bash install.sh /ruta/a/tu-proyecto
 ```
 
 ### 2. Abrir Antigravity (o tu entorno de IA) en la carpeta del proyecto

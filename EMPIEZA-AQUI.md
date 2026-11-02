@@ -6,13 +6,22 @@
 
 ## Paso 1 — Instalar el Harness en tu proyecto
 
-Abre PowerShell en tu terminal y ejecuta el script instalador indicando la ruta de tu proyecto:
+Abre PowerShell y ejecuta esta sola línea:
 
 ```powershell
-.\install.ps1 -Project "C:\Users\Gerald\Desktop\mi-nuevo-proyecto"
+irm https://raw.githubusercontent.com/gmreyescdev/gemini-design-harness/main/install.ps1 | iex
 ```
 
-*(Si no existe la carpeta, el script la creará automáticamente y copiará todos los archivos necesarios a `docs/harness/` y el archivo `AGENTS.md` a la raíz).*
+Te preguntará la carpeta de destino para tu nuevo proyecto (si no existe, la crea).
+
+*(Si ya clonaste el repositorio o deseas ejecutarlo manualmente: `.\install.ps1 -Project "C:\Ruta\A\TuProyecto"`)*
+
+En **macOS / Linux**:
+```bash
+git clone https://github.com/gmreyescdev/gemini-design-harness.git
+cd gemini-design-harness
+bash install.sh /ruta/a/tu-proyecto
+```
 
 ---
 
